@@ -249,6 +249,10 @@ function resetTimer() {
   startButton.textContent = "開始";
   pauseButton.disabled = true;
   flightMessage.textContent = "計時器重置，準備好再次啟航。";
+  if (shipPreview) {
+    shipPreview.classList.remove("takeoff", "landing");
+    shipPreview.style.visibility = "visible";
+  }
 }
 
 startButton.addEventListener("click", startTimer);
@@ -288,7 +292,7 @@ function init() {
   // Animation controls for ship takeoff/landing
   if (shipPreview) {
     shipPreview.addEventListener("animationend", (e) => {
-      if (e.animationName === "shipTakeoff") {
+      if (e.animationName === "shipTakeoff" && shipPreview.classList.contains("takeoff")) {
         shipPreview.style.visibility = "hidden";
         shipPreview.classList.remove("takeoff");
       } else if (e.animationName === "shipLanding") {
@@ -301,7 +305,7 @@ function init() {
 function playTakeoff() {
   if (!shipPreview) return;
   shipPreview.style.visibility = "visible";
-  shipPreview.classList.remove("landing");
+  shipPreview.classList.remove("landing", "takeoff");
   // trigger reflow to restart animation if needed
   void shipPreview.offsetWidth;
   shipPreview.classList.add("takeoff");
@@ -310,7 +314,7 @@ function playTakeoff() {
 function playLanding() {
   if (!shipPreview) return;
   shipPreview.style.visibility = "visible";
-  shipPreview.classList.remove("takeoff");
+  shipPreview.classList.remove("takeoff", "landing");
   void shipPreview.offsetWidth;
   shipPreview.classList.add("landing");
 }
