@@ -40,6 +40,9 @@ const bodyOptionsContainer = document.getElementById("bodyOptions");
 const thrusterOptionsContainer = document.getElementById("thrusterOptions");
 const shipBody = document.getElementById("shipBody");
 const shipThruster = document.getElementById("shipThruster");
+const shipPreview = document.getElementById("shipPreview");
+const thrusterFlame = document.getElementById("thrusterFlame");
+const currentTimeEl = document.getElementById("currentTime");
 const currentBodyName = document.getElementById("currentBodyName");
 const currentThrusterName = document.getElementById("currentThrusterName");
 const storageStatus = document.getElementById("storageStatus");
@@ -213,6 +216,7 @@ function completeFocusSession() {
   saveState();
   updateStatusPanels();
   renderShopItems();
+  playLanding();
 }
 
 function startTimer() {
@@ -225,6 +229,7 @@ function startTimer() {
   startButton.textContent = "繼續";
   pauseButton.disabled = false;
   flightMessage.textContent = "艙門已關閉，飛行中...保持專注。";
+  playTakeoff();
 }
 
 function pauseTimer() {
@@ -270,6 +275,44 @@ function init() {
   const savedDuration = Number(localStorage.getItem("studySpaceDuration")) || 25;
   setDuration(savedDuration);
   storageStatus.textContent = "已儲存";
+
+  // Initialize clock
+  function updateClock() {
+    if (!currentTimeEl) return;
+    const now = new Date();
+    currentTimeEl.textContent = now.toLocaleTimeString();
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Animation controls for ship takeoff/landing
+  if (shipPreview) {
+    shipPreview.addEventListener("animationend", (e) => {
+      if (e.animationName === "shipTakeoff") {
+        shipPreview.style.visibility = "hidden";
+        shipPreview.classList.remove("takeoff");
+      } else if (e.animationName === "shipLanding") {
+        shipPreview.classList.remove("landing");
+      }
+    });
+  }
+}
+
+function playTakeoff() {
+  if (!shipPreview) return;
+  shipPreview.style.visibility = "visible";
+  shipPreview.classList.remove("landing");
+  // trigger reflow to restart animation if needed
+  void shipPreview.offsetWidth;
+  shipPreview.classList.add("takeoff");
+}
+
+function playLanding() {
+  if (!shipPreview) return;
+  shipPreview.style.visibility = "visible";
+  shipPreview.classList.remove("takeoff");
+  void shipPreview.offsetWidth;
+  shipPreview.classList.add("landing");
 }
 
 window.addEventListener("beforeunload", saveState);

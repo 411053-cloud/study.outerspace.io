@@ -29,6 +29,10 @@
         <span class="label">研究完成</span>
         <span id="completedSessions" class="value">0</span>
       </div>
+      <div class="status-item">
+        <span class="label">時間</span>
+        <span id="currentTime" class="value">--:--:--</span>
+      </div>
     </div>
   </header>
 
@@ -80,7 +84,9 @@
 
       <div class="ship-preview" id="shipPreview">
         <div class="ship-body" id="shipBody"></div>
-        <div class="ship-thruster" id="shipThruster"></div>
+        <div class="ship-thruster" id="shipThruster">
+          <div class="thruster-flame" id="thrusterFlame"></div>
+        </div>
       </div>
 
       <div class="shop-section">
