@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDY.SPACE</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scene">
+    <div class="nebula"></div>
+    <div class="stars"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-mark">⭑</span>
+      <div>
+        <h1>STUDY.SPACE</h1>
+        <p>專注計時、太空飛行、飛船客製</p>
+      </div>
+    </div>
+    <div class="status-panel">
+      <div class="status-item">
+        <span class="label">CREDITS</span>
+        <span id="creditValue" class="value">0</span>
+      </div>
+      <div class="status-item">
+        <span class="label">研究完成</span>
+        <span id="completedSessions" class="value">0</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="focus-card glass-card">
+      <div class="card-header">
+        <div>
+          <h2>專注計時器</h2>
+          <p>啟動專注飛行任務，完成後獲得 CREDITS。</p>
+        </div>
+        <div class="mission-tag">任務艙</div>
+      </div>
+
+      <div class="timer-display">
+        <div class="timer-circle">
+          <span id="timerMinutes">25</span>
+          <span>:</span>
+          <span id="timerSeconds">00</span>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+        <button id="startButton" class="primary">開始</button>
+        <button id="pauseButton" disabled>暫停</button>
+        <button id="resetButton">重置</button>
+      </div>
+
+      <div class="duration-options">
+        <button class="duration" data-minutes="15">15 分</button>
+        <button class="duration active" data-minutes="25">25 分</button>
+        <button class="duration" data-minutes="45">45 分</button>
+        <button class="duration" data-minutes="60">60 分</button>
+      </div>
+
+      <div class="flight-log">
+        <h3>最新任務</h3>
+        <p id="flightMessage">準備起飛，請保持專注。</p>
+      </div>
+    </section>
+
+    <section class="shop-card glass-card">
+      <div class="card-header">
+        <div>
+          <h2>飛船客製商店</h2>
+          <p>用 CREDITS 解鎖船體與尾焰造型。</p>
+        </div>
+        <div class="mission-tag">基地</div>
+      </div>
+
+      <div class="ship-preview" id="shipPreview">
+        <div class="ship-body" id="shipBody"></div>
+        <div class="ship-thruster" id="shipThruster"></div>
+      </div>
+
+      <div class="shop-section">
+        <div class="shop-panel">
+          <h3>船體</h3>
+          <div class="shop-list" id="bodyOptions"></div>
+        </div>
+        <div class="shop-panel">
+          <h3>尾焰</h3>
+          <div class="shop-list" id="thrusterOptions"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-card glass-card">
+      <div class="card-header">
+        <div>
+          <h2>飛行紀錄</h2>
+          <p>本地保存您的專注任務、解鎖進度與選擇。</p>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <span class="label">當前飛船</span>
+          <strong id="currentBodyName">標準機身</strong>
+        </div>
+        <div class="info-box">
+          <span class="label">當前尾焰</span>
+          <strong id="currentThrusterName">藍色熱浪</strong>
+        </div>
+        <div class="info-box">
+          <span class="label">存檔狀態</span>
+          <strong id="storageStatus">已儲存</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>STUDY.SPACE — 專注訓練與科技駕駛艦隊</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
